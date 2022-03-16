@@ -5,6 +5,7 @@
 
 ### To run:
 
+##### - npm install
 ##### - cd server
 ##### - node index
 
