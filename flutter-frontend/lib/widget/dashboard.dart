@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:mipx/widget/connect.dart';
+import 'package:mipx/widget/connect2.dart';
+import 'dart:convert';
 
 class Investment {
   String invName;
@@ -14,14 +18,36 @@ class Investment {
   }
 }
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   Dashboard({Key key}) : super(key: key);
 
-  List<Investment> trial = [
-    Investment('Tesla', 100),
-    Investment('Apple', 150),
-    Investment('WallMart', 400)
-  ];
+  @override
+  _Dashboard createState() => _Dashboard();
+}
+
+// List<Investment> trial = [
+//   Investment('Tesla', 100),
+//   Investment('Apple', 150),
+//   Investment('WallMart', 400)
+// ],
+
+class _Dashboard extends State<Dashboard> {
+  List<Invest> invList = [];
+
+  void lumber() async {
+    Client.getEm().then((response) => {
+          setState(() {
+            Iterable lijst = json.decode(response.body);
+            invList = lijst.map((model) => Invest.fromJson(model)).toList();
+          })
+        });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    lumber();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,13 +170,15 @@ class Dashboard extends StatelessWidget {
       ),
       Expanded(
         child: ListView.builder(
-          itemCount: trial.length,
+          // Change back to length!!
+          itemCount: invList.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
               child: ListTile(
                 hoverColor: Color.fromARGB(133, 75, 28, 155),
                 onTap: () {},
-                title: Text(trial[index].invName),
+                // title: Text(trial[index].invName),
+                title: Text(invList[index].description),
                 trailing: Text(
                   '500',
                   style: TextStyle(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Register extends StatelessWidget {
+  final userName = TextEditingController();
+  final passWord = TextEditingController();
+  final passWord2 = TextEditingController();
+
   Register({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,6 +52,7 @@ class Register extends StatelessWidget {
                             Container(
                               width: 400,
                               child: TextField(
+                                controller: userName,
                                 decoration:
                                     InputDecoration(hintText: 'username'),
                                 //controller: company,
@@ -64,6 +69,7 @@ class Register extends StatelessWidget {
                             Container(
                               width: 400,
                               child: TextField(
+                                controller: passWord,
                                 decoration:
                                     InputDecoration(hintText: 'password'),
                                 //controller: buyVar,
@@ -80,6 +86,7 @@ class Register extends StatelessWidget {
                             Container(
                               width: 400,
                               child: TextField(
+                                controller: passWord2,
                                 decoration:
                                     InputDecoration(hintText: 'password'),
                                 //controller: buyVar,
