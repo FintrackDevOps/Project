@@ -180,7 +180,7 @@ class _Dashboard extends State<Dashboard> {
                 // title: Text(trial[index].invName),
                 title: Text(invList[index].description),
                 trailing: Text(
-                  '500',
+                  invList[index].buyvalue,
                   style: TextStyle(
                     color: Colors.green,
                     fontSize: 15,

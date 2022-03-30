@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:mipx/widget/connect.dart';
+import 'package:flutter/services.dart';
+
+import 'connect3.dart';
 
 class Investment {
   String invName;
@@ -14,17 +18,20 @@ class Investment {
   }
 }
 
-class Add extends StatelessWidget {
+class Add extends StatefulWidget {
   Add({Key key}) : super(key: key);
 
-  List<Investment> trial = [
-    Investment('Tesla', 100),
-    Investment('Apple', 150),
-    Investment('WallMart', 400)
-  ];
+  @override
+  _Add createState() => _Add();
+}
 
-  final company = TextEditingController();
-  final buyVar = TextEditingController();
+class _Add extends State<Add> {
+  bool _add = false;
+
+  final descriptionF = TextEditingController();
+  final buyvalueF = TextEditingController();
+  final amountF = TextEditingController();
+  final stockabreviation = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -208,8 +215,11 @@ class Add extends StatelessWidget {
                         Container(
                           width: 400,
                           child: TextField(
-                            decoration: InputDecoration(hintText: '\'tesla\''),
-                            controller: company,
+                            decoration: InputDecoration(
+                              hintText: '\'tesla\'',
+                              errorText: _add ? 'Put in a value' : null,
+                            ),
+                            controller: descriptionF,
                           ),
                         ),
                       ],
@@ -223,16 +233,61 @@ class Add extends StatelessWidget {
                         Container(
                           width: 400,
                           child: TextField(
-                            decoration: InputDecoration(hintText: '\'200\''),
-                            controller: buyVar,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            decoration: InputDecoration(
+                              hintText: '\'200\'',
+                              errorText: _add ? 'Put in a value' : null,
+                            ),
+                            controller: buyvalueF,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                            width: 200,
+                            child: Text('current price (in euro\'s):',
+                                style: TextStyle(fontSize: 18))),
+                        Container(
+                          width: 400,
+                          child: TextField(
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            decoration: InputDecoration(
+                              hintText: '\'200\'',
+                              errorText: _add ? 'Put in a value' : null,
+                            ),
+                            controller: amountF,
                           ),
                         ),
                       ],
                     ),
                     TextButton(
-                      onPressed: () => AlertDialog(
-                        content: Text(company.text),
-                      ),
+                      // onPressed: () => makeInvest(Invest(buyvalueF.text,
+                      //     int.parse(amountF.text), descriptionF.text, "long")),
+
+                      onPressed: () {
+                        amountF.text.isEmpty &&
+                                buyvalueF.text.isEmpty &&
+                                descriptionF.text.isEmpty
+                            ? makeInvest(Invest(
+                                buyvalueF.text,
+                                int.parse(amountF.text),
+                                descriptionF.text,
+                                'kjvb'))
+                            : null;
+                        setState(() {
+                          amountF.text.isEmpty &&
+                                  buyvalueF.text.isEmpty &&
+                                  descriptionF.text.isEmpty
+                              ? _add = true
+                              : _add = false;
+                        });
+                      },
                       child: Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 30, vertical: 8),
