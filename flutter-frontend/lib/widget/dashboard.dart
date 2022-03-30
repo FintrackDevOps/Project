@@ -175,18 +175,29 @@ class _Dashboard extends State<Dashboard> {
           itemBuilder: (BuildContext context, int index) {
             return Card(
               child: ListTile(
-                hoverColor: Color.fromARGB(133, 75, 28, 155),
-                onTap: () {},
-                // title: Text(trial[index].invName),
-                title: Text(invList[index].description),
-                trailing: Text(
-                  invList[index].buyvalue,
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
+                  hoverColor: Color.fromARGB(133, 75, 28, 155),
+                  onTap: () {},
+                  // title: Text(trial[index].invName),
+                  title: Text(invList[index].description),
+                  trailing: RichText(
+                    text: TextSpan(
+                      style: TextStyle(fontSize: 15),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Your buy value was: ',
+                        ),
+                        TextSpan(
+                            text: invList[index].buyvalue,
+                            style: TextStyle(color: Colors.green)),
+                        TextSpan(
+                          text: ' the current value is: ',
+                        ),
+                        TextSpan(
+                            text: invList[index].amount.toString(),
+                            style: TextStyle(color: Colors.green)),
+                      ],
+                    ),
+                  )),
             );
           },
         ),

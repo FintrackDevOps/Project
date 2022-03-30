@@ -30,6 +30,30 @@ class About extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            TextButton(
+              onPressed: (() => Navigator.pushReplacementNamed(context, '/')),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[200],
+                      spreadRadius: 10,
+                      blurRadius: 12,
+                    ),
+                  ],
+                ),
+                child: Text(
+                  'back',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       )),

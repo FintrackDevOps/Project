@@ -114,9 +114,6 @@ class Top extends StatelessWidget {
       ),
     );
   }
-
-//onEnter: Navigator.pushNamed(context, '/home'),
-
 }
 
 class Bottum extends StatelessWidget {
@@ -163,10 +160,14 @@ class Bottum extends StatelessWidget {
     );
   }
 
+  final UsernameA = TextEditingController();
+  final PasswordA = TextEditingController();
+
   Widget _formulier(BuildContext context) {
     return Column(
       children: [
         TextField(
+          controller: UsernameA,
           decoration: InputDecoration(
             hintText: 'Gebruikersnaam',
             fillColor: Colors.blueGrey[50],
@@ -185,6 +186,7 @@ class Bottum extends StatelessWidget {
         ),
         SizedBox(height: 30),
         TextField(
+          controller: PasswordA,
           obscureText: true,
           enableSuggestions: false,
           autocorrect: false,
@@ -222,7 +224,10 @@ class Bottum extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: Center(child: Text("Log in"))),
-            onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+            onPressed: () =>
+                (PasswordA.text == 'samiir') && (UsernameA.text == 'samiir')
+                    ? Navigator.pushReplacementNamed(context, '/home')
+                    : AlertDialog(title: Text("Wrong username or password")),
             style: ElevatedButton.styleFrom(
               primary: Colors.deepPurple,
               onPrimary: Colors.white,
