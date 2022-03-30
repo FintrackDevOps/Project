@@ -5,7 +5,7 @@ import 'package:mipx/widget/connect.dart';
 
 Future<http.Response> makeInvest(Invest adding) {
   return http.post(
-    Uri.parse('http://localhost:8000//transactions/:id'),
+    Uri.parse('http://localhost:8000/transactions'),
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
     },

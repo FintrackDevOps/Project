@@ -271,15 +271,15 @@ class _Add extends State<Add> {
                       //     int.parse(amountF.text), descriptionF.text, "long")),
 
                       onPressed: () {
-                        amountF.text.isEmpty &&
-                                buyvalueF.text.isEmpty &&
-                                descriptionF.text.isEmpty
+                        amountF.text.isNotEmpty &&
+                                buyvalueF.text.isNotEmpty &&
+                                descriptionF.text.isNotEmpty
                             ? makeInvest(Invest(
                                 buyvalueF.text,
-                                int.parse(amountF.text),
+                                amountF.text,
                                 descriptionF.text,
                                 'kjvb'))
-                            : null;
+                            : print("AAAAAAAAAAAAAAAAAAA");
                         setState(() {
                           amountF.text.isEmpty &&
                                   buyvalueF.text.isEmpty &&

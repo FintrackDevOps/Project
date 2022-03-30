@@ -1,6 +1,6 @@
 class Invest {
   String stockabreviation;
-  int amount;
+  String amount;
   String buyvalue;
   String description;
 

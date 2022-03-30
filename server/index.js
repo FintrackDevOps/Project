@@ -13,12 +13,16 @@ app.use(express.json()); //req.body
 
 app.post("/transactions", async (req, res) => {
   try {
-    const { description } = req.body;
+    const { stock_abreviation } = req.body.stock_abreviation;
+    const { amount } = req.body.amount;
+    const { buy_value } = req.body.buy_value;
+    const { description } = req.body.description;
     const newTransaction = await pool.query(
-      "INSERT INTO finboard (description) VALUES($1) RETURNING *",
-      [description]
+      "INSERT INTO finboard (stock_abreviation, amount, buy_value, description) VALUES($1, $2, $3, $4) RETURNING *",
+      [stock_abreviation, amount, buy_value, description]
     );
 
+    console.log("INSERT DONE!");
     res.json(newTransaction.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -53,13 +57,16 @@ app.get("/transactions/:id", async (req, res) => {
 
 //update a transaction
 
-app.put("/transactions/:id", async (req, res) => {
+app.put("/transactions/:stock/:amount/:value/:description/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { description } = req.body;
+    const { stock_abreviation } = req.body.stock_abreviation;
+    const { amount } = req.body.amount;
+    const { buy_value } = req.body.buy_value;
+    const { description } = req.body.description;
     const updateTransaction = await pool.query(
-      "UPDATE finboard SET description = $1 WHERE transaction_id = $2",
-      [description, id]
+      "UPDATE finboard SET tock_abreviation = $1, amount = $2, buy_value = $3 ,description = $4,  WHERE transaction_id = $5",
+      [stock_abreviation, amount, buy_value, description, id]
     );
 
     res.json("Transaction was updated!");
