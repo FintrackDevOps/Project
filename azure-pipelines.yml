@@ -21,7 +21,7 @@ stages:
         echo "var password = '$password'" >> env.js
         echo "var host = '$host'" >> env.js
         echo "var port = $port" >> env.js
-        echo "var database= '$database'" >> env.js
+        echo "var database= '$databaseTEST'" >> env.js
         echo "exports.user = user;" >> env.js
         echo "exports.password = password;" >> env.js
         echo "exports.host = host;" >> env.js
