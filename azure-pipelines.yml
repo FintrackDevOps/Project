@@ -1,13 +1,145 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- pipeline
+- main
 
-pool: vm-pool
+pool: Default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages: 
+- stage: TestServer
+  pool: 
+    name: Default
+    demands: agent.name -equals VM-Test-Server
+  jobs:
+  - job: KillAnyNodeServer
+    steps:
+    - script: killAll node
+
+  - job: InstallNode
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.4.0' 
+
+  - job: SetEnvAndRunServer
+    steps:
+    - script: |
+        cd client
+        touch env.js
+        echo "var user = '$DBUser';" >> env.js
+        echo "var password = '$password'" >> env.js
+        echo "var host = '$host'" >> env.js
+        echo "var port = $port" >> env.js
+        echo "var database= '$database'" >> env.js
+        echo "exports.user = user;" >> env.js
+        echo "exports.password = password;" >> env.js
+        echo "exports.host = host;" >> env.js
+        echo "exports.port = port;" >> env.js
+        echo "exports.database = database;" >> env.js
+        npm install
+        node index &
+
+  - job: RunTestsServer
+    steps:
+    - script: echo "Tests should be run here"
+
+
+- stage: TestClient
+  dependsOn: TestServer
+  pool: 
+    name: Default
+    demands: agent.name -equals VM-Test-Client
+  jobs:
+  - job: KillAnyNodeClient
+    steps:
+    - script: killAll node
+
+  - job: InstallNode
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.4.0' 
+  
+  - job: SetEnvAndRunClient
+    steps:
+    - script: |
+        cd client
+        touch serverIP.js
+        echo "var serverIP = $TestServerIP"
+        npm install
+        npm start &
+
+  - job: RunTestsClient
+    steps:
+    - script: echo "Tests should be run here"
+  
+  - job: TerminateClient
+    steps: 
+    - script: killAll node
+
+
+- stage: TerminateTestServer
+  dependsOn: TestClient
+  pool: 
+    name: Default
+    demands: agent.name -equals VM-Test-Server
+  jobs:
+  - job: KillAnyNodeServer
+    steps:
+    - script: killAll node
+
+- stage: DeployServer
+  dependsOn: TerminateTestServer
+  pool:
+    name: Default
+    demands: agent.name -equals VM-Deploy-Server
+    jobs:
+    - job: KillAnyNodeServer
+      steps:
+      - script: killAll node
+    
+    - job: InstallNode
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.4.0'
+    
+    - job: SetEnvAndRunServer
+      steps:
+      - script: |
+          cd client
+          touch env.js
+          echo "var user = '$DBUser';" >> env.js
+          echo "var password = '$password'" >> env.js
+          echo "var host = '$host'" >> env.js
+          echo "var port = $port" >> env.js
+          echo "var database= '$database'" >> env.js
+          echo "exports.user = user;" >> env.js
+          echo "exports.password = password;" >> env.js
+          echo "exports.host = host;" >> env.js
+          echo "exports.port = port;" >> env.js
+          echo "exports.database = database;" >> env.js
+
+
+- stage: DeployClient
+  dependsOn: TerminateTestServer
+  pool: 
+    name: Default
+    demands: agent.name -equals VM-Deploy-Client
+  jobs:
+  - job: KillAnyNodeClient
+    steps:
+    - script: killAll node
+  
+  - job: InstallNode
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.4.0' 
+
+  - job: SetEnvAndRunClient
+    steps:
+    - script: |
+        cd client
+        touch serverIP.js
+        echo "var serverIP = $DeployServerIP"
+        npm install
+        npm start &
