@@ -13,10 +13,11 @@ app.use(express.json()); //req.body
 
 app.post("/transactions", async (req, res) => {
   try {
-    const { description } = req.body;
+    const { description, buyvalue, amount, stockabreviation } = req.body;
+    console.log("hello " + description + " " + buyvalue + " " + amount + " " + stockabreviation);
     const newTransaction = await pool.query(
-      "INSERT INTO finboard (description) VALUES($1) RETURNING *",
-      [description]
+      "INSERT INTO finboard (description, buy_value, amount, stock_abreviation) VALUES($1, $2, $3, $4) RETURNING *",
+      [description, buyvalue, amount, stockabreviation]
     );
 
     res.json(newTransaction.rows[0]);
@@ -73,6 +74,7 @@ app.put("/transactions/:id", async (req, res) => {
 app.delete("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    console.log("hello " + description + " " + buyvalue + " " + amount + " " + stockabreviation);
     const deleteTransaction = await pool.query("DELETE FROM finboard WHERE transaction_id = $1", [
       id
     ]);
