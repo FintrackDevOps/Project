@@ -187,7 +187,7 @@ class _Dashboard extends State<Dashboard> {
                           text: 'Your buy value was: ',
                         ),
                         TextSpan(
-                            text: invList[index].buyvalue,
+                            text: invList[index].buyvalue.toString(),
                             style: TextStyle(color: Colors.green)),
                         TextSpan(
                           text: ' the current value is: ',

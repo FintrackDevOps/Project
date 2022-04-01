@@ -272,7 +272,7 @@ class _Add extends State<Add> {
 
                       onPressed: () {
                         makeInvest(Invest(
-                            buyvalueF.text,
+                            int.parse(buyvalueF.text),
                             int.parse(amountF.text),
                             descriptionF.text,
                             'kjvb'));

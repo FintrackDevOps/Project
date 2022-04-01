@@ -1,7 +1,7 @@
 class Invest {
   String stockabreviation;
   int amount;
-  String buyvalue;
+  int buyvalue;
   String description;
 
   Invest(this.buyvalue, this.amount, this.description, this.stockabreviation);
