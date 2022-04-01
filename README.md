@@ -10,5 +10,7 @@
 ##### - node index
 
 ### Open another terminal and run:
-##### - cd client
-##### - npm start
+##### - cd flutter-frontend
+##### - flutter build web
+##### - cd build/web
+##### - python3 -m http.server 3000
