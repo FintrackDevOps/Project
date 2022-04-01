@@ -65093,7 +65093,7 @@ $0(){var s=t._
 return A.ec(this.a,"/",s,s)},
 $S:6}
 A.a4E.prototype={
-$0(){var s=null,r=this.a,q=A.f0(r.f.a.a,s),p=A.f0(r.r.a.a,s),o=r.e.a.a,n=A.j_("http://localhost:8000/transactions/",0,s),m=t.bD,l=A.aC(["Content-Type","application/json; charset=UTF-8"],m,m)
+$0(){var s=null,r=this.a,q=A.f0(r.f.a.a,s),p=A.f0(r.r.a.a,s),o=r.e.a.a,n=A.j_("http://20.124.239.13:8000/transactions/",0,s),m=t.bD,l=A.aC(["Content-Type","application/json; charset=UTF-8"],m,m)
 A.azV(n,B.ax.JE(A.aC(["description",o,"buy_value",q,"amount",p,"stock_abreviation","kjvb"],m,t._),s),l)
 r.au(new A.a4z(r))},
 $S:4}
@@ -65110,7 +65110,7 @@ aw(){return new A.JW(A.b([],t.ch),B.n)}}
 A.JW.prototype={
 l_(){var s=0,r=A.a6(t.z),q=this
 var $async$l_=A.a7(function(a,b){if(a===1)return A.a3(b,r)
-while(true)switch(s){case 0:A.alo(A.j_("http://localhost:8000/transactions",0,null)).ba(0,new A.a62(q),t.dF)
+while(true)switch(s){case 0:A.alo(A.j_("http://20.124.239.13:8000/transactions",0,null)).ba(0,new A.a62(q),t.dF)
 return A.a4(null,r)}})
 return A.a5($async$l_,r)},
 aW(){this.bs()
@@ -65158,7 +65158,7 @@ aw(){return new A.K5(A.b([],t.ch),B.n)}}
 A.K5.prototype={
 l_(){var s=0,r=A.a6(t.z),q=this
 var $async$l_=A.a7(function(a,b){if(a===1)return A.a3(b,r)
-while(true)switch(s){case 0:A.alo(A.j_("http://localhost:8000/transactions",0,null)).ba(0,new A.a6r(q),t.dF)
+while(true)switch(s){case 0:A.alo(A.j_("http://20.124.239.13:8000/transactions",0,null)).ba(0,new A.a6r(q),t.dF)
 return A.a4(null,r)}})
 return A.a5($async$l_,r)},
 aW(){this.bs()
@@ -65199,7 +65199,7 @@ A.a6i.prototype={
 $0(){},
 $S:4}
 A.a6j.prototype={
-$0(){return A.am1(A.j_("http://localhost:8000/transactions/"+J.cJ(this.a),0,null))},
+$0(){return A.am1(A.j_("http://20.124.239.13:8000/transactions/"+J.cJ(this.a),0,null))},
 $S:401}
 A.q0.prototype={
 P(a,b){var s=null,r="password",q=A.c1(20),p=t.Sx,o=A.b([new A.cn(15,B.aD,B.dO,B.j,10)],p),n=A.e6(A.bu("Register",s,s,s,A.bh(s,s,B.ao,s,s,s,s,s,s,s,s,45,s,B.a3,s,s,!0,s,s,s,s,s,s,s,s),B.dj,s),s,s),m=t.Y,l=A.fm(A.b([A.aB(s,A.bu("Username:",s,s,s,A.bh(s,s,s,s,s,s,s,s,s,s,s,18,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),s,s,s,s,s,300),A.aB(s,A.ny(!0,this.c,A.kU(s,s,s,s,s,s,s,s,!0,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,"username",s,s,s,s,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s),!0,s,!1),s,s,s,s,s,400)],m),B.aa,B.Q),k=A.fm(A.b([A.aB(s,A.bu("Password",s,s,s,A.bh(s,s,s,s,s,s,s,s,s,s,s,18,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),s,s,s,s,s,300),A.aB(s,A.ny(!1,this.d,A.kU(s,s,s,s,s,s,s,s,!0,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,r,s,s,s,s,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s),!1,s,!0),s,s,s,s,s,400)],m),B.aa,B.Q),j=A.fm(A.b([A.aB(s,A.bu("Repeat password",s,s,s,A.bh(s,s,s,s,s,s,s,s,s,s,s,18,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),s,s,s,s,s,300),A.aB(s,A.ny(!1,this.e,A.kU(s,s,s,s,s,s,s,s,!0,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,r,s,s,s,s,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s),!1,s,!0),s,s,s,s,s,400)],m),B.aa,B.Q),i=A.c1(15),h=A.b([new A.cn(10,B.aD,B.bM,B.j,12)],p)
