@@ -40,19 +40,17 @@ stages:
   pool: 
     name: TestClient
   jobs:
-  - job: KillAnyNodeClient
+  - job: KillAnyPythonClient
     steps:
     - script: killAll node
   
-  - job: SetEnvAndRunClient
+  - job: RunTestClient
     steps:
     - script: |
-        cd client
-        touch serverIP.js
-        echo "var serverIP = $TestServerIP"
-        npm install
-        npm start &
-
+        cd flutter-frontend
+        flutter build web
+        cd build/web
+        python3 -m http.server 3000 &
   - job: RunTestsClient
     steps:
     - script: echo "Tests should be run here"
@@ -102,16 +100,14 @@ stages:
   pool: 
     name: DeployClient
   jobs:
-  - job: KillAnyNodeClient
+  - job: KillAnyPythonClient
     steps:
-    - script: killAll node
+    - script: killAll python
   
-
   - job: SetEnvAndRunClient
     steps:
     - script: |
-        cd client
-        touch serverIP.js
-        echo "var serverIP = $DeployServerIP"
-        npm install
-        npm start &
+        cd flutter-frontend
+        flutter build web
+        cd build/web
+        python3 -m http.server 3000 &
